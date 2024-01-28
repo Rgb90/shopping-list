@@ -1,0 +1,12 @@
+body {
+    background-image: url('./assets/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Sayfa yüksekliğine göre ayarlayabilirsiniz */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
