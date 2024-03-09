@@ -6,7 +6,9 @@ import { nanoid } from "nanoid";
 import Table from 'react-bootstrap/Table';
 import IconButton from './IconButton';
 import Fuse from 'fuse.js';
-import Confetti from 'react-confetti';
+import JSConfetti from 'js-confetti'
+
+const jsConfetti = new JSConfetti()
 
 
 const shops = [
@@ -28,7 +30,7 @@ const categories = [
 
 // "1. Kategori ve Marketten oluşan iki obje array oluştur
 
-const Wrap = styled.div`
+/* const Wrap = styled.div`
  width: 650px;
  display: flex;
  flex-direction: column;
@@ -43,7 +45,47 @@ align-items: end;
 gap: 12px;
 padding: 24px;
 margin-left: 20px;
-`
+` */
+
+const Wrap = styled.div`
+  width: 100%;
+  max-width: 700px; /* Tasarımınıza bağlı olarak maksimum genişliği ayarlayın */
+  margin: 0 auto;
+  padding: 20px;
+  margin-left: -95px;
+  color:#0063B6;
+
+  table {
+    color:#157347; /* Tablo içindeki yazı rengi */
+
+    thead th {
+      color:#0063B6; /* Tablo başlıkları içindeki yazı rengi */
+    }
+  }
+
+
+  input,
+  select {
+    color:#157347; /* Input ve select içindeki yazı rengi */
+  }
+`;
+
+const ResponsiveWrapper = styled.div`
+margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    .responsive-select {
+      width: 25%; /* Geniş ekranlarda select'lerin genişliğini ayarlayabilirsiniz */
+      height: 25%; /* Yüksekliği otomatik ayarlayarak yüksekliği kontrol edebilirsiniz */
+    }
+  }
+`;
+
 
 // 2. Form input’lar aracılığıyla kullanıcıdan yeni ürün bilgisi alacağız, 
 //ardından girilen o ürünleri bir “products” state’ine kaydedeceğiz
@@ -56,7 +98,7 @@ export function ShoppingList() {
 
     const [selectedCategory, setSelectedCategory] = useState(categories[0].id);
 
-    const [filterShop, setFilterShop] = useState(null); //x
+    const [filterShop, setFilterShop] = useState("all"); //x
 
     const [filterCategory, setFilterCategory] = useState("all");
 
@@ -64,7 +106,7 @@ export function ShoppingList() {
 
     const [filterProductName, setFilterProductName] = useState("");
 
-    const [showConfetti, setShowConfetti] = useState(false);
+  
 
     const filteredProducts = products.filter((product) => {
         let result = true; // Ürüne gözükebilirsin dedik önce
@@ -113,7 +155,7 @@ export function ShoppingList() {
             
             <Form>
                 <h3>Alınacaklar Listesi</h3>
-                <Wrapper>
+                <ResponsiveWrapper>
                     <Form.Control
                         aria-label='Small'
                         aria-description='inputGroup-sizing-sm'
@@ -182,15 +224,15 @@ export function ShoppingList() {
                         variant='success'
                         style={{ width: "25%" }}>
                         Ekle</Button>
-                </Wrapper>
+                </ResponsiveWrapper>
                 
-                <Wrapper>
+                <ResponsiveWrapper>
                     <div key={"default-radio"} className='mb-3'>
                         <Form.Check
                         inline
                             type={'radio'}
                             id={'default-radio-2'}
-                            label={"tümü"}
+                            label={"Tümü"}
                             name="isbought"
                             checked={filterIsbought === null}
                             onClick={() => {
@@ -201,7 +243,7 @@ export function ShoppingList() {
                         inline
                             type={'radio'}
                             id={'default-radio'}
-                            label={"satın alınanlar"}
+                            label={"Alınanlar"}
                             name="isbought"
                             checked={filterIsbought === true}
                             onClick={() => {
@@ -212,7 +254,7 @@ export function ShoppingList() {
                         inline
                             type={'radio'}
                             id={'default-radio-2'}
-                            label={"satın alınmayanlar"}
+                            label={"Alınmayanlar"}
                             name="isbought"
                             checked={filterIsbought === false}
                             onClick={() => {
@@ -221,6 +263,7 @@ export function ShoppingList() {
                         />
                     </div>
                     <Form.Select
+                     className="responsive-select"  // burada sınıfı ekleyin
                         style={{ width: "25%" }}
                         aria-label="Default select example"
                         value={filterShop}
@@ -235,6 +278,7 @@ export function ShoppingList() {
                         ))}
                     </Form.Select>
                     <Form.Select
+                     className="responsive-select"  // burada sınıfı ekleyin
                         style={{ width: "25%" }}
                         aria-label="Default select example"
                         value={filterCategory}
@@ -249,6 +293,8 @@ export function ShoppingList() {
                         ))}
                     </Form.Select>
                     <Form.Control
+                     className="responsive-select" 
+                     style={{ width: "25%" }}
                         aria-label='Small'
                         aria-description='inputGroup-sizing-sm'
                         onChange={(e) => {
@@ -257,10 +303,10 @@ export function ShoppingList() {
                         value={filterProductName}
                     />
 
-                </Wrapper>
+                </ResponsiveWrapper>
             </Form>
            
-            <div className='px-4'>
+            <div className='px-4 mt-2'>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -291,12 +337,7 @@ export function ShoppingList() {
                                     });
                                     if (
                                         copyProducts.every((product) => product.isBought === true)
-                                    ) {
-                                        showConfetti && <Confetti />
-                                        alert("Alışveriş tamamlandı");
-                                        jsConfetti.addConfetti();
-                                        setShowConfetti(true);
-                                    }
+                                    )jsConfetti.addConfetti(alert("Alışveriş tamamlandı"))
                                     /* React’ta state’i güncellerken setState yaptığımız fonksiyonun içinde o state’in önceki haline erişebiliyorduk.
                                     Bunu kullanarak önceki hali güncellemeden hemen önce (state’in güncellenmesi için return etmeden hemen önce) 
                                     alışverişin tamamlanması koşulu uyuyorsa alert patlatabiliriz */
