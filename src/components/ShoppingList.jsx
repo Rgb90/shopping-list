@@ -53,20 +53,27 @@ const Wrap = styled.div`
   margin: 0 auto;
   padding: 20px;
   margin-left: -95px;
-  color:#0063B6;
+  color:#198754;
 
   table {
-    color:#157347; /* Tablo içindeki yazı rengi */
-
     thead th {
-      color:#0063B6; /* Tablo başlıkları içindeki yazı rengi */
+      color:#9A0128; /* Tablo başlıkları içindeki yazı rengi */
     }
   }
 
-
   input,
   select {
-    color:#157347; /* Input ve select içindeki yazı rengi */
+    color:#198754; /* Input ve select içindeki yazı rengi */
+  }
+
+  @media (min-width: 750px) and (max-width: 1200px) {
+    max-width: 600px; /* 750px ile 1200px arasında daha daraltılmış genişlik */
+  }
+
+  @media (max-width: 767px) {
+    h3 {
+      background-color: white; /* En küçük ekranlarda "hs" elementinin arka plan rengi beyaz */
+    }
   }
 `;
 
