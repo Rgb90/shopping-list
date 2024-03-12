@@ -49,7 +49,7 @@ margin-left: 20px;
 
 const Wrap = styled.div`
   width: 100%;
-  max-width: 700px; /* Tasarımınıza bağlı olarak maksimum genişliği ayarlayın */
+  max-width: 700px; /* Tasarımınıza bağlı olarak maksimum genişlik */
   margin: 0 auto;
   padding: 20px;
   margin-left: -95px;
@@ -72,7 +72,7 @@ const Wrap = styled.div`
 
   @media (max-width: 767px) {
     h3 {
-      background-color: white; /* En küçük ekranlarda "hs" elementinin arka plan rengi beyaz */
+      background-color: white; /* En küçük ekranlarda "h3" elementinin arka plan rengi beyaz */
     }
   }
 `;
@@ -87,8 +87,8 @@ margin-top: 5%;
     flex-direction: row;
 
     .responsive-select {
-      width: 25%; /* Geniş ekranlarda select'lerin genişliğini ayarlayabilirsiniz */
-      height: 25%; /* Yüksekliği otomatik ayarlayarak yüksekliği kontrol edebilirsiniz */
+      width: 25%; /* Geniş ekranlarda select'lerin genişliği */
+      height: 25%; /* Yüksekliği otomatik ayarlayarak yüksekliği */
     }
   }
 `;
