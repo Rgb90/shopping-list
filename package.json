@@ -1,8 +1,8 @@
 {
   "name": "shopping-list",
+  "homepage": "https://Rgb90.github.io/shopping-list/",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://Rgb90.github.io/shopping-list/",
   "type": "module",
   "scripts": {
     "predeploy" : "npm run build",
