@@ -65,7 +65,7 @@ devDependencies:
     specifier: ^0.4.5
     version: 0.4.5(eslint@8.57.0)
   gh-pages:
-    specifier: ^6.1.1
+    specifier: 6.1.1
     version: 6.1.1
 
 packages:
