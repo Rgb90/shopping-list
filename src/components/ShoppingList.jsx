@@ -49,9 +49,9 @@ margin-left: 20px;
 
 const Wrap = styled.div`
   width: 100%;
-  max-width: 700px; /* Tasarımınıza bağlı olarak maksimum genişlik */
+  max-width: 600px; /* Tasarımınıza bağlı olarak maksimum genişlik */
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   margin-left: -95px;
   color:#198754;
 
@@ -67,7 +67,8 @@ const Wrap = styled.div`
   }
 
   @media (min-width: 750px) and (max-width: 1200px) {
-    max-width: 600px; /* 750px ile 1200px arasında daha daraltılmış genişlik */
+    margin-left: -65px;
+    max-width: 500px; /* 750px ile 1200px arasında daha daraltılmış genişlik */
   }
 
   @media (max-width: 767px) {
@@ -75,6 +76,12 @@ const Wrap = styled.div`
       background-color: white; /* En küçük ekranlarda "h3" elementinin arka plan rengi beyaz */
     }
   }
+
+  @media (max-width: 576px) and (max-width: 750px) {
+    margin-left: -45px;
+    max-width: 400px;
+  }
+
 `;
 
 const ResponsiveWrapper = styled.div`
@@ -83,7 +90,7 @@ margin-top: 5%;
   flex-direction: column;
   gap: 12px;
   
-  @media (min-width: 768px) {
+  @media (min-width: 576px) {
     flex-direction: row;
 
     .responsive-select {
